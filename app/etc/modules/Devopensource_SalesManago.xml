@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Devopensource_SalesManago>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Devopensource_SalesManago>
+    </modules>
+</config>

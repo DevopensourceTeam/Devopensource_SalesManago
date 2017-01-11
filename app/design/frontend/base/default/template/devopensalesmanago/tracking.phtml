@@ -1,0 +1,23 @@
+<?php
+$client_id              = $this->getClientId();
+$client_salesmanago_id  = $this->getClientSalesManagoId();
+$endpoint               = $this->getEndPoint();
+
+if($this->isEnableTrackingJs() && $this->isActive() && $client_id != ''): ?>
+    <script type='text/javascript'>
+        var _smid = '<?php echo $client_id ?>';
+        var _smclientid = '<?php echo $client_salesmanago_id ?>';
+
+        (function(w, r, a, sm, s ) {
+            w['SalesmanagoObject'] = r;
+            w[r] = w[r] || function () {( w[r].q = w[r].q || [] ).push(arguments)};
+            sm = document.createElement('script'); sm.type = 'text/javascript'; sm.async = true; sm.src = a;
+            s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(sm, s);
+        })(window, 'sm', ('https:' == document.location.protocol ? 'https://' : 'http://') + '<?php echo $endpoint ?>/static/sm.js');
+    </script>
+<?php endif; ?>
+
+<?php if($this->isEnablePopup() && $this->isActive() && $this->getEndpointPopup() != ''): ?>
+    <script src="<?php echo $this->getEndpointPopup(); ?>"></script>
+<?php endif; ?>

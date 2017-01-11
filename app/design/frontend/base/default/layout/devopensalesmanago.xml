@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.1">
+    <default>
+        <reference name="head">
+            <block type="devopensalesmanago/tracking" name="devopensalesmanago_tracking">
+                <action method="setTemplate"><template>devopensalesmanago/tracking.phtml</template></action>
+            </block>
+        </reference>
+    </default>
+</layout>
