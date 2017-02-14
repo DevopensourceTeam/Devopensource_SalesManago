@@ -15,5 +15,6 @@ Devopensource_SalesManago
 - Customizacion de tags por tipo de cliente.
 - Exportación productos para SM-
 - Creacion de Tags por paginas y categorias visitadas
-- Creacion de customer en registro newsletter y
+- Creacion de customer en registro newsletter y añadir opt-in
+- Al darse de baja de la newsletter opt-out
 
