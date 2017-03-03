@@ -20,10 +20,10 @@
 
 ## Instalación y configuración
 
-1º Instalar modulo en el Magento, subiendo cada fichero a su correspondiente fichero.
-2º Sistema > configuración > Devopensource_SalesManago
-3º Campo habilitar a "si" para un funcionamiento basico necesario insertar valores en campos "Client id", "Api secret", "Endpoint" (valor por defecto), con esto tendremos el funcionamiento basico de las tags.
-4º Si queremos otras funcionalidades las habilitamos, "Tracking js", "Popup JS"
-5º despues configuramos las tags en cada seccion "Cart", "Favoritos", etc...
-6º Para habilitar la funcionalidad de exportar los productos automáticos simplemente tenemos que habilitar "Si" y meter "Token" un valor generado aleatoriamente, despues al partner de SM hay que pasarle la url "https://www.dominio.com/salesmanago/export/products/token/{valor del token indicando previamente}"
+1. Instalar modulo en el Magento, subiendo cada fichero a su correspondiente fichero.
+2. Sistema > configuración > Devopensource_SalesManago
+3. Campo habilitar a "si" para un funcionamiento basico necesario insertar valores en campos "Client id", "Api secret", "Endpoint" (valor por defecto), con esto tendremos el funcionamiento basico de las tags.
+4. Si queremos otras funcionalidades las habilitamos, "Tracking js", "Popup JS"
+5. despues configuramos las tags en cada seccion "Cart", "Favoritos", etc...
+6. Para habilitar la funcionalidad de exportar los productos automáticos simplemente tenemos que habilitar "Si" y meter "Token" un valor generado aleatoriamente, despues al partner de SM hay que pasarle la url "https://www.dominio.com/salesmanago/export/products/token/valor del token indicando previamente"
 Con esta url SM podrá acceder a la url de los últimos productos.
