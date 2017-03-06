@@ -5,7 +5,6 @@
 - Creacion de customer en registro de Magento
 - Actualización de cuenta y direccciones del cliente.
 - Tracking js de cliente
-
 - Tracking y generador de popups en frontend
 - Añadido envío de tags y mejora de configuración en backend
 - Añadido modo debug
