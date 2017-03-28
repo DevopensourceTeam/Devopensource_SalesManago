@@ -14,6 +14,7 @@
 - Creacion de Tags por paginas y categorias visitadas
 - Creacion de customer en registro newsletter y añadir opt-in
 - Al darse de baja de la newsletter opt-out
+- Notificación web push
 
 #### Eventos
 
