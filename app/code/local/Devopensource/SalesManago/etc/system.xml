@@ -109,6 +109,16 @@
                             <comment>Limit the maximum execution time in ms (optional)</comment>
                             <depends><active>1</active></depends>
                         </connection_timeout>
+                        <tracking_code_push>
+                            <label>Tracking code push </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Example: sm('webPush', ['12345678-1234-1234-1234-123456789abc', '12']);</comment>
+                            <depends><active>1</active></depends>
+                        </tracking_code_push>
                     </fields>
                 </general>
                 <newsletter>

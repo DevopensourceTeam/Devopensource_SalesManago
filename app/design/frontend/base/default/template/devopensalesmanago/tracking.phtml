@@ -15,6 +15,7 @@ if($this->isEnableTrackingJs() && $this->isActive() && $client_id != ''): ?>
             s = document.getElementsByTagName('script')[0];
             s.parentNode.insertBefore(sm, s);
         })(window, 'sm', ('https:' == document.location.protocol ? 'https://' : 'http://') + '<?php echo $endpoint ?>/static/sm.js');
+        <?php echo Mage::getStoreConfig('devopensalesmanago/general/tracking_code_push', Mage::app()->getStore()); ?>
     </script>
 <?php endif; ?>
 
