@@ -6,7 +6,11 @@ $endpoint               = $this->getEndPoint();
 if($this->isEnableTrackingJs() && $this->isActive() && $client_id != ''): ?>
     <script type='text/javascript'>
         var _smid = '<?php echo $client_id ?>';
-        var _smclientid = '<?php echo $client_salesmanago_id ?>';
+        <?php
+        if(!$client_salesmanago_id == ''){
+            echo "var _smclientid = '".$client_salesmanago_id."';";
+        }
+        ?>
 
         (function(w, r, a, sm, s ) {
             w['SalesmanagoObject'] = r;
