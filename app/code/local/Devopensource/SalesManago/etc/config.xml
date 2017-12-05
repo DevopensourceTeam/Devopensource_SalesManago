@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Devopensource_SalesManago>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Devopensource_SalesManago>
     </modules>
     <global>
@@ -106,6 +106,15 @@
                     </devopensalesmanago_tracking_observer>
                 </observers>
             </customer_login>
+            <webforms_result_submit>
+                <observers>
+                    <webforms_result_submit_observer>
+                        <type>singleton</type>
+                        <class>Devopensource_SalesManago_Model_Observer</class>
+                        <method>contactFormEvent</method>
+                    </webforms_result_submit_observer>
+                </observers>
+            </webforms_result_submit>
         </events>
     </global>
     <frontend>
@@ -160,6 +169,9 @@
             <wishlist>
                 <active_wishlist>0</active_wishlist>
             </wishlist>
+            <navigation>
+                <active_navigation>0</active_navigation>
+            </navigation>
             <debug>
                 <active_debug>0</active_debug>
             </debug>

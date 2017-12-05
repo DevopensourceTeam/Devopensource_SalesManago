@@ -285,6 +285,114 @@
                         </tags>
                     </fields>
                 </wishlist>
+                <contact>
+                    <label>Contact</label>
+                    <sort_order>63</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active_contact>
+                            <label>Enable Contact Form tracking</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active_contact>
+                        <tag1>
+                            <label>Tag 1 Comentario sobre mi pedido</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag1>
+                        <tag2>
+                            <label>Tag 2 Atención comercial</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag2>
+                        <tag3>
+                            <label>Tag 3 Servicio técnico</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag3>
+                        <tag4>
+                            <label>Tags 4 Cconsulta Administración / Contabilidad</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag4>
+                        <tag5>
+                            <label>Tag 5 Informar problema en web</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag5>
+                        <tag6>
+                            <label>Tag 6 Quejas y sugerencias</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag6>
+                        <tag7>
+                            <label>Tag 7 Ofrecerse proveedor</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag7>
+                        <tag8>
+                            <label>Tag 8 Otras consultas</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><active_contact>1</active_contact></depends>
+                        </tag8>
+                    </fields>
+                </contact>
+                <navigation>
+                    <label>Navigation</label>
+                    <sort_order>65</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active_navigation>
+                            <label>Enable Navigtion Tags</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active_navigation>
+                    </fields>
+                </navigation>
                 <sync_products>
                     <label>Sync Products</label>
                     <sort_order>70</sort_order>

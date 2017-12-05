@@ -14,6 +14,8 @@ class Devopensource_SalesManago_Model_Observer {
         return Mage::helper('devopensalesmanago');
     }
 
+
+
     public function customerEvent(Varien_Event_Observer $observer){
         $helper = $this->_getHelper();
         if(!$helper->isEnabled() || !$helper->isEnabledRegister()){
@@ -227,6 +229,36 @@ class Devopensource_SalesManago_Model_Observer {
         }
     }
 
+    public function contactFormEvent($observer){
+        // This function maps brildor contact data
+        $helper = $this->_getHelper();
+        if (!$helper->isEnabled()) return false;
+        if (!$helper->isEnabledContact()) return false;
+
+        // Check if it is the right form
+        $webform = $observer->getWebform();
+        if ($webform->getCode() != 'contactanos') return false;
+
+        // Check if customer is logged
+        $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn();
+        if (!$isLoggedIn) return false;
+
+        // Get customer data and set it to SM
+        $customer = Mage::getSingleton('customer/session')->getCustomer();
+        $data = $this->_getHelper()->setCustomerData($customer);
+
+        // Get and map form subject as a tag
+        $formData = $observer->getResult()->getData();
+        $subject = $formData['field'][183];
+        $subject++;
+        $tag = Mage::getStoreConfig('devopensalesmanago/contact/tag'.$subject, Mage::app()->getStore());
+
+        // Set SM tags and sync
+        $data['tags'] = $helper->addTags($tag);
+        $this->_getHelper()->salesmanagoSync($data,Devopensource_SalesManago_Helper_Data::PATH_NEW_OR_UPDATE);
+
+    }
+
     public function actionExportSm(Varien_Event_Observer $observer)
     {
         $helper = $this->_getHelper();
@@ -237,13 +269,48 @@ class Devopensource_SalesManago_Model_Observer {
 
         $block = $observer->getEvent()->getBlock();
 
+        /*
+        * Action export product
+        *
+        * */
         if($block instanceof Mage_Adminhtml_Block_Widget_Grid_Massaction
             && $block->getRequest()->getControllerName() == 'catalog_product')
         {
             $block->addItem('exportprodsm', array(
-                'label' => 'Export XML SM',
+                'label' => 'Export product XML (SM) ',
                 'url' => $block->getUrl('adminhtml/sm/exportproductsm', array('_current'=>true))
             ));
+        }
+
+        /*
+         * Action export order
+         *
+         * */
+        if(get_class($block) =='Mage_Adminhtml_Block_Widget_Grid_Massaction'
+            && $block->getRequest()->getControllerName() == 'sales_order')
+        {
+
+            $block->addItem('export_order', array(
+                'label' => Mage::helper('core')->__('Export Order XLS (SM) '),
+                'url' => $block->getUrl('adminhtml/sm/exportorder', array('_current'=>true))
+            ));
+
+        }
+
+
+        /*
+         * Action export order 2016
+         *
+         * */
+        if(get_class($block) =='Mage_Adminhtml_Block_Widget_Grid_Massaction'
+            && $block->getRequest()->getControllerName() == 'sales_order')
+        {
+
+            $block->addItem('export_order_year', array(
+                'label' => Mage::helper('core')->__('Export Order 2016 XLS (SM) '),
+                'url' => $block->getUrl('adminhtml/sm/exportorderyear', array('_current'=>true))
+            ));
+
         }
 
     }

@@ -26,3 +26,6 @@ if($this->isEnableTrackingJs() && $this->isActive() && $client_id != ''): ?>
 <?php if($this->isEnablePopup() && $this->isActive() && $this->getEndpointPopup() != ''): ?>
     <script src="<?php echo $this->getEndpointPopup(); ?>"></script>
 <?php endif; ?>
+<?php
+echo $this->getTagNavigation();
+?>

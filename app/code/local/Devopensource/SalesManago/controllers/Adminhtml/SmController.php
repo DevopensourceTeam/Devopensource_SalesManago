@@ -32,9 +32,19 @@ class Devopensource_SalesManago_Adminhtml_SmController extends Mage_Adminhtml_Co
 
     }
 
+    public function exportorderAction(){
+        $orderIds = $this->getRequest()->getPost('order_ids');
+        Mage::helper('devopensalesmanago')->genXlsOrders($orderIds);
+    }
+
+
+    public function exportorderyearAction(){
+        Mage::helper('devopensalesmanago')->genXlsOrders(null, '2016');
+    }
+
     protected function _isAllowed()
     {
-       // return Mage::getSingleton('admin/session')->isAllowed('catalog/devopensource_import/devopensource_import');
+        // return Mage::getSingleton('admin/session')->isAllowed('catalog/devopensource_import/devopensource_import');
         return true;
     }
 

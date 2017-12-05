@@ -73,4 +73,51 @@ class Devopensource_SalesManago_Block_Tracking extends Mage_Core_Block_Template 
     }
 
 
+    public function getTagNavigation(){
+
+        if(Mage::getSingleton('customer/session')->isLoggedIn() && Mage::helper('devopensalesmanago')->isEnabledTagNavigation()){
+            $_current_category = Mage::registry('current_category');
+            $tags = array();
+            if($_current_category){
+                if($_current_category->getSmTagNavigation()){
+                    $listTags = explode(",",$_current_category->getSmTagNavigation());
+                    foreach($listTags as $tag){
+                        $tags[] = Mage::getModel('devopensalesmanago/source_Tags')->getOptionText($tag);
+                    }
+                }
+            }
+
+            $_current_product = Mage::registry('current_product');
+            if($_current_product){
+                if($_current_product->getSmTagNavigation()){
+                    $listTags = explode(",",$_current_product->getSmTagNavigation());
+                    foreach($listTags as $tag){
+                        $tags[] = Mage::getModel('devopensalesmanago/source_Tags')->getOptionText($tag);
+                    }
+                }
+            }
+
+            $tags = array_unique($tags);
+            if($tags){
+                $customerEmail = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+                $customerEmail = Mage::getModel('core/encryption')->encrypt($customerEmail);
+
+                foreach($tags as $index=>$tag){
+                    $tags[$index] = "'".Mage::getModel('core/encryption')->encrypt($tag)."'";
+                }
+
+                return "<script>
+                var smUser = '$customerEmail';
+                var smTag = [ ". implode(',', $tags) . "];
+
+                jQuery(document).ready(function() {
+                    jQuery.post( '".Mage::getBaseUrl()."smajax.php"."', { 'user': smUser,'tag[]': smTag } );
+                });
+                </script>";
+
+            }
+        }
+    }
+
+
 }

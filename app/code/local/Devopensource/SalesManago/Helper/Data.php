@@ -40,6 +40,14 @@ class Devopensource_SalesManago_Helper_Data extends Mage_Core_Helper_Abstract {
         return Mage::getStoreConfig('devopensalesmanago/wishlist/active_wishlist', Mage::app()->getStore());
     }
 
+    public function isEnabledTagNavigation(){
+        return Mage::getStoreConfig('devopensalesmanago/navigation/active_navigation', Mage::app()->getStore());
+    }
+
+    public function isEnabledContact(){
+        return Mage::getStoreConfig('devopensalesmanago/contact/active_contact', Mage::app()->getStore());
+    }
+
     public function getTagRegistration(){
         return Mage::getStoreConfig('devopensalesmanago/registration/tags', Mage::app()->getStore());
     }
@@ -332,6 +340,82 @@ class Devopensource_SalesManago_Helper_Data extends Mage_Core_Helper_Abstract {
         }
 
         return $result;
+    }
+
+    public function genXlsOrders($orderIds, $year = null){
+
+        if($year != null){
+            $orders = Mage::getModel('sales/order')
+            ->getCollection()
+            ->addFieldToFilter('created_at', array(
+                'from'  => $year.'-01-01',
+                'to'    => $year.'-12-31',
+                'date'  => true,
+            ));
+        }else{
+            $orders = Mage::getModel('sales/order')
+                ->getCollection()
+                ->addFieldToFilter('entity_id', array('in' => $orderIds ));
+        }
+
+
+        function xlsBOF() {
+            echo pack("ssssss", 0x809, 0x8, 0x0, 0x10, 0x0, 0x0);
+        }
+        function xlsEOF() {
+            echo pack("ss", 0x0A, 0x00);
+        }
+        function xlsWriteNumber($Row, $Col, $Value) {
+            echo pack("sssss", 0x203, 14, $Row, $Col, 0x0);
+            echo pack("d", $Value);
+        }
+        function xlsWriteLabel($Row, $Col, $Value) {
+            $L = strlen($Value);
+            echo pack("ssssss", 0x204, 8 + $L, $Row, $Col, 0x0, $L);
+            echo $Value;
+        }
+
+        // prepare headers information
+        header("Content-Type: application/force-download");
+        header("Content-Type: application/octet-stream");
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment; filename=\"export_orders_sm_".date("Y-m-d").".xls\"");
+        header("Content-Transfer-Encoding: binary");
+        header("Pragma: no-cache");
+        header("Expires: 0");
+
+        // start exporting
+        xlsBOF();
+
+        // first row
+        xlsWriteLabel(0, 0, utf8_decode("email"));
+        xlsWriteLabel(0, 1, utf8_decode("products"));
+        xlsWriteLabel(0, 2, utf8_decode("total_amount"));
+        xlsWriteLabel(0, 3, utf8_decode("order_date"));
+
+        Mage::log(count($orders), null, 'count.log');
+
+        $i=0; //filas
+        foreach($orders as $_order) {
+            $i++;
+
+            $productsIdsList    = array();
+            $items              = $_order->getAllVisibleItems();
+
+            foreach ($items as $item) {
+                array_push($productsIdsList, $item->getProduct()->getSku());
+            }
+
+            xlsWriteLabel($i, 0, $_order->getCustomerEmail());
+            xlsWriteLabel($i, 1, utf8_decode(implode(',',$productsIdsList)));
+            xlsWriteLabel($i, 2, utf8_decode($_order->getGrandTotal()));
+            xlsWriteLabel($i, 3, utf8_decode(Mage::getModel('core/date')->date('Y-m-d H:i:s',$_order->getCreatedAt())));
+
+        }
+
+        xlsEOF();
+
+
     }
 
 }
